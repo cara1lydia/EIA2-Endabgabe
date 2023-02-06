@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fireworks</title>
+    <script src="../EIA2-Endabgabe/Endabgabe_main_script.js"></script>
+    <script src="../EIA2-Endabgabe/Classes/Vector.js"></script>
+    <script src="../EIA2-Endabgabe/Classes/Firework.js"></script>
+    <link rel="stylesheet" href="../EIA2-Endabgabe/Endabgabe_style.css">
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div id="settings">
+        <h1>CREATE YOUR OWN FIREWORK</h1>
+        <form id="formelement">
+            <fieldset>
+                <p>What's the size?</p>
+                <input type="radio" id="bigsize" name="thesize" value="BIG" checked="checked">
+                  <label for="bigsize">BIG</label>
+                  <input type="radio" id="smallsize" name="thesize" value="small">
+                  <label for="smallsize">small</label>
+            </fieldset>
+
+            <fieldset>
+                <p>What's the color?</p>
+                <input type="color" id="thecolor" name="thecolor" value="#FB5B5B">
+            </fieldset>
+
+            <fieldset>
+                <p>What about the shape?</p>
+
+                <input type="radio" id="starshape" id="shape" name="theshape" value="star">
+                  <label for="starshape">Star</label>
+                  <input type="radio" id="heartshape" id="shape" name="theshape" value="heart" checked="checked">
+                  <label for="heartshape">Heart</label>
+            </fieldset>
+        </form>
+
+        <button id="savebutton">Save</button>
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
