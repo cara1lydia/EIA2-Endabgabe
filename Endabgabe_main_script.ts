@@ -8,7 +8,16 @@
 
 namespace Fireworks {
 
+    //global canvas
     export let crc2: CanvasRenderingContext2D;
+    export let canvas: HTMLCanvasElement;
+
+    let size: number;
+    let color: string;
+    let shape: string;
+
+
+    //laden der Seite
     window.addEventListener("load", handleLoad);
 
     function handleLoad(_event: Event): void {
@@ -20,6 +29,11 @@ namespace Fireworks {
     }
 
 
+    function shootRocket (_event: MouseEvent): void {
+
+    }
+
+    
 
 
 

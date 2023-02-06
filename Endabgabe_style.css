@@ -5,24 +5,31 @@ body {
 
 #canvas {
     background-color: black;
-    position: relative;
-
-    left: 0.2%;
-    top: 0.2%;
+    position: absolute;
+    left: 18%;
+    top: 8%;
     border: 20px;
     border-color: rgb(195, 211, 207);
     border-radius: 5px;
     border-style: groove;
+}
 
-
+h1 {
+    position: absolute;
+    top: 0%;
+    left: 35%;
 }
 
 fieldset {
     background-color: rgb(195, 211, 207);
     float: left;
-    position: relative;
-    left: 33.4%;
     border-width: 8px;
+}
+
+#formelement {
+    position: absolute;
+    left: 33%;
+    top: 58.5%;
 }
 
 #savebutton {
@@ -30,8 +37,81 @@ fieldset {
     border-radius: 15%;
     border-color: rgb(215, 166, 255);
     position: absolute;
-    top: 77%;
-    left: 48.4%;
+    top: 73%;
+    left: 48.2%;
+    cursor: pointer
+}
+
+#savebutton:hover {
+    background-color: #814bff;
+    border-color: #6f3ee2;
+}
+
+#pictures {
+    position: absolute;
+    left: 31%;
+    top: 75%;
+}
+ 
+img {
+    height: 200px;
+    width: 150px;
+}
+
+#rs1 {
+    position: absolute;
+    top: 80%;
+    left: 6.5%;
+    background-color: #814bff;
+    border-color: #6f3ee2;
+    border-radius: 15%;
+}
+
+#rs2 {
+    position: absolute;
+    top: 80%;
+    left: 31.7%;
+    background-color: rgb(213, 189, 236);
+    border-color: rgb(215, 166, 255);
+    border-radius: 15%;
+}
+
+#rs3 {
+    position: absolute;
+    top: 80%;
+    left: 57%;
+    background-color: rgb(213, 189, 236);
+    border-color: rgb(215, 166, 255);
+    border-radius: 15%;
+}
+
+#rs4 {
+    position: absolute;
+    top: 80%;
+    left: 82.2%;
+    background-color: rgb(213, 189, 236);
+    border-color: rgb(215, 166, 255);
+    border-radius: 15%;
+}
+
+#rs1:hover {
+    background-color: #814bff;
+    border-color: #6f3ee2;
+}
+
+#rs2:hover {
+    background-color: #814bff;
+    border-color: #6f3ee2;
+}
+
+#rs3:hover {
+    background-color: #814bff;
+    border-color: #6f3ee2;
+}
+
+#rs4:hover {
+    background-color: #814bff;
+    border-color: #6f3ee2;
 }
 
 p {
