@@ -2,6 +2,11 @@ namespace Fireworks {
 
     export class Square extends Particle {
 
+        constructor(_color: string, _position: Vector, _lifetime: number) {
+            super(_color, _position, _lifetime);
+            this.draw();
+        }
+
         draw(): void {
 
             crc2.save();

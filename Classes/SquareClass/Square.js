@@ -1,6 +1,10 @@
 var Fireworks;
 (function (Fireworks) {
     class Square extends Fireworks.Particle {
+        constructor(_color, _position, _lifetime) {
+            super(_color, _position, _lifetime);
+            this.draw();
+        }
         draw() {
             Fireworks.crc2.save();
             Fireworks.crc2.beginPath();

@@ -1,11 +1,15 @@
 var Fireworks;
 (function (Fireworks) {
     class Circle extends Fireworks.Particle {
+        constructor(_color, _position, _lifetime) {
+            super(_color, _position, _lifetime);
+            this.draw();
+        }
         draw() {
             Fireworks.crc2.save();
             Fireworks.crc2.beginPath();
             Fireworks.crc2.translate(this.position.x, this.position.y);
-            Fireworks.crc2.arc(0, 0, 7 * this.radius / 100, 0, 2 * Math.PI);
+            Fireworks.crc2.arc(0, 0, 7 * this.radius / 30, 0, 2 * Math.PI);
             Fireworks.crc2.closePath();
             Fireworks.crc2.fillStyle = this.color;
             if (this.lifetime < 0) {

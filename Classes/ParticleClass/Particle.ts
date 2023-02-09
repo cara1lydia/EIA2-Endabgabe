@@ -12,14 +12,12 @@ namespace Fireworks {
         constructor(_color: string, _position: Vector, _lifetime: number) {
             let speed: Vector = new Vector(Math.floor((Math.random() * 20) + 2), Math.floor((Math.random() * 20) + 2));
             this.speed = speed;
-            let position: Vector = new Vector(this.position.x, this.position.y);
-            this.position = position;
+            this.position = _position;
             this.color = _color;
             this.lifetime = _lifetime;
             this.radius = Math.floor((Math.random() * 20) + 2);
             this.opacity = 1;
         }
-
 
         move(): void {
             let offset: Vector = this.speed;

@@ -5,7 +5,7 @@ var Fireworks;
         color;
         shape;
         position;
-        particles;
+        particles = [];
         constructor(_lifetime, _color, _shape, _position) {
             this.position = _position;
             this.color = _color;
@@ -15,7 +15,7 @@ var Fireworks;
         }
         explode() {
             // erstellt Partikel und pushed sie ins Array
-            for (let i = 0; i >= 30; i++) {
+            for (let i = 0; i < 30; i++) {
                 // Kreis oder Viereck
                 switch (this.shape) {
                     case "circle":
