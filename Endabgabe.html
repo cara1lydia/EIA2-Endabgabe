@@ -8,7 +8,9 @@
     <title>Fireworks</title>
     <script src="../EIA2-Endabgabe/Endabgabe_main_script.js"></script>
     <script src="../EIA2-Endabgabe/Classes/Vector.js"></script>
-    <script src="../EIA2-Endabgabe/Classes/Firework.js"></script>
+    <script src="../EIA2-Endabgabe/Classes/Particle.js"></script>
+    <script src="../EIA2-Endabgabe/Classes/Circle.js"></script>
+    <script src="../EIA2-Endabgabe/Classes/Square.js"></script>
     <script src="../EIA2-Endabgabe/Classes/Rocket.js"></script>
     <link rel="stylesheet" href="../EIA2-Endabgabe/Endabgabe_style.css">
 </head>
@@ -20,7 +22,7 @@
         <h1>CREATE YOUR OWN FIREWORK</h1>
         <form id="formelement">
             <fieldset>
-                <p>What's the size?</p>
+                <p>Size Of Explosion</p>
                 <input type="radio" id="bigsize" name="thesize" value="150" checked="checked">
                   <label for="bigsize">BIG</label>
                   <input type="radio" id="smallsize" name="thesize" value="90">
@@ -28,12 +30,12 @@
             </fieldset>
 
             <fieldset>
-                <p>What's the color?</p>
+                <p>Color</p>
                 <input type="color" id="thecolor" name="thecolor" value="#FB5B5B">
             </fieldset>
 
             <fieldset>
-                <p>What about the shape?</p>
+                <p>Shape Of Particle</p>
 
                 <input type="radio" id="circleshape" id="shape" name="theshape" value="circle" checked="checked">
                   <label for="starshape">Circle</label>

@@ -7,11 +7,13 @@
     */
 var Fireworks;
 (function (Fireworks) {
-    let size;
+    let lifetime;
     let color;
     let shape;
-    let fireworks = [];
-    let gravity = 0.04;
+    let radius;
+    let opacity;
+    let speed;
+    let rocket;
     //Laden der Seite
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
@@ -26,33 +28,26 @@ var Fireworks;
     //Ausführen der Kreation
     function createRocket(_event) {
         let rect = Fireworks.canvas.getBoundingClientRect();
+        //Mouse Position wird übertragen
         let mousePositionX = _event.clientX - rect.left - 16;
         let mousepositionY = _event.clientY - rect.top - 16;
+        //Daten der Settings auf Variablen anwenden 
         let formData = new FormData(document.forms[0]);
-        /*crc2.clearRect(0, 0, canvas.width, canvas.height);*/
         for (let entry of formData) {
-            size = Number(formData.get("thesize"));
+            lifetime = Number(formData.get("thesize"));
             color = String(formData.get("thecolor"));
             shape = String(formData.get("theshape"));
-            switch (entry[1]) {
-                case "circle":
-                    shape = "circle";
-                    break;
-                case "square":
-                    shape = "square";
-                    break;
-            }
             console.log(entry[1]);
         }
         //let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
         //let rocketCreated: Firework = new Rocket (size, color, shape, rocketPosition);
         //fireworks.push(rocketCreated);
-        animateRocket(size, color, shape, mousePositionX, mousepositionY);
+        animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
         console.log(mousePositionX, mousepositionY);
-        console.log(size, color, shape);
+        console.log(lifetime, color, shape);
     }
     //kreieren der Rakete 
-    function animateRocket(_size, _color, _shape, _mousePositionX, _mousePositionY) {
+    function animateRocket(_mousePositionX, _mousePositionY, _size, _color, _radius, _opacity, _speed, _shape) {
         let rocketPosition = new Fireworks.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
         let quantity = 30;
@@ -60,7 +55,7 @@ var Fireworks;
         for (let i = 0; i < quantity; i++) {
             let px;
             let py;
-            let velocity;
+            let speed;
             let newRocket;
             if (i % 2 == 0) {
                 px = Math.cos(radian * i) * 150 + Math.random() * 20;
@@ -70,9 +65,9 @@ var Fireworks;
                 px = Math.cos(radian * i) * 110 * Math.random() * 2;
                 py = Math.sin(radian * i) * 110 * Math.random() * 2;
             }
-            velocity = new Fireworks.Vector(px, py);
-            newRocket = new Fireworks.Rocket(size, color, shape, rocketPosition);
-            fireworks.push(newRocket);
+            speed = new Fireworks.Vector(px, py);
+            newRocket = new Fireworks.Rocket(lifetime, color, shape, rocketPosition);
+            rocket.push(newRocket);
         }
     }
     //Save Button überträgt Settings auf Speicherstand

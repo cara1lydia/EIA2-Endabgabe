@@ -12,11 +12,13 @@ namespace Fireworks {
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement;
 
-    let size: number;
+    let lifetime: number;
     let color: string;
     let shape: string;
-    let fireworks: Firework[] = [];
-    let gravity: number = 0.04;
+    let radius: number;
+    let opacity: number;
+    let speed: Vector;
+    let rocket: Rocket[];
 
 
     //Laden der Seite
@@ -37,25 +39,16 @@ namespace Fireworks {
     //Ausführen der Kreation
     function createRocket(_event: MouseEvent): void {
         let rect: DOMRect = canvas.getBoundingClientRect();
+        //Mouse Position wird übertragen
         let mousePositionX: number = _event.clientX - rect.left - 16;
         let mousepositionY: number = _event.clientY - rect.top - 16;
+        //Daten der Settings auf Variablen anwenden 
         let formData: FormData = new FormData(document.forms[0]);
 
-        /*crc2.clearRect(0, 0, canvas.width, canvas.height);*/
-
         for (let entry of formData) {
-            size = Number(formData.get("thesize"));
+            lifetime = Number(formData.get("thesize"));
             color = String(formData.get("thecolor"));
             shape = String(formData.get("theshape"));
-
-            switch (entry[1]) {
-                case "circle":
-                    shape = "circle";
-                    break;
-                case "square":
-                    shape = "square";
-                    break;
-            }
 
             console.log(entry[1]);
         }
@@ -64,23 +57,25 @@ namespace Fireworks {
         //let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
         //let rocketCreated: Firework = new Rocket (size, color, shape, rocketPosition);
         //fireworks.push(rocketCreated);
-        animateRocket(size, color, shape, mousePositionX, mousepositionY);
+        animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
 
         console.log(mousePositionX, mousepositionY); 
-        console.log(size, color, shape);
+        console.log(lifetime, color, shape);
     }
 
     //kreieren der Rakete 
-    function animateRocket (_size: number, _color: string, _shape: string, _mousePositionX: number, _mousePositionY: number): void {
+    function animateRocket ( _mousePositionX: number, _mousePositionY: number, _size: number, _color: string, _radius: number, _opacity: number, _speed: Vector, _shape: string): void {
+
         let rocketPosition: Vector = new Vector(_mousePositionX, _mousePositionY);
         let color: string = _color;
         let quantity: number = 30;
         let radian: number = (Math.PI * 2) / quantity;
+        
         for (let i: number = 0; i < quantity; i++) {
             let px: number;
             let py: number;
-            let velocity: Vector;
-            let newRocket: Firework;
+            let speed: Vector;
+            let newRocket: Rocket;
             if (i % 2 == 0) {
               px = Math.cos(radian * i) * 150 + Math.random() * 20;
               py = Math.sin(radian * i) * 150 + Math.random() * 20;
@@ -89,9 +84,9 @@ namespace Fireworks {
               px = Math.cos(radian * i) * 110 * Math.random() * 2;
               py = Math.sin(radian * i) * 110 * Math.random() * 2;
             }
-            velocity = new Vector(px, py);
-            newRocket = new Rocket(size, color, shape, rocketPosition);
-            fireworks.push(newRocket);
+            speed = new Vector(px, py);
+            newRocket = new Rocket(lifetime, color, shape, rocketPosition);
+            rocket.push(newRocket);
           }
     }
 
