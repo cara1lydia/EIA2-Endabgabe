@@ -10,7 +10,8 @@ namespace Fireworks {
             crc2.stroke();
             crc2.fillStyle = this.color;
             if (this.lifetime < 0) {
-                crc2.globalAlpha = this.opacity --;
+                crc2.globalAlpha = this.opacity;
+                this.opacity -= 0.05;
             }
             crc2.fill();
             crc2.restore();

@@ -1,9 +1,9 @@
 /**
-    * Aufgabe: Endabgabe
+    * Aufgabe: Endabgabe 
     * Name: Cara Lydia Brüggendieck
     * Matrikel: 269899
     * Datum: 10.02.2023
-    * Quellen: 
+    * Quellen: In Zusammenarbeit mit Vivi und Henning
     */
 
 namespace Fireworks {
@@ -18,7 +18,7 @@ namespace Fireworks {
     let radius: number;
     let opacity: number;
     let speed: Vector;
-    let rocket: Rocket[];
+    let rocket: Rocket[] = [];
 
 
     //Laden der Seite
@@ -54,10 +54,12 @@ namespace Fireworks {
         }
 
 
-        //let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
-        //let rocketCreated: Firework = new Rocket (size, color, shape, rocketPosition);
-        //fireworks.push(rocketCreated);
-        animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
+        let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
+        let rocketCreated: Rocket = new Rocket (lifetime, color, shape, rocketPosition);
+        console.log(rocketCreated);
+        rocket.push(rocketCreated);
+
+        //animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
 
         console.log(mousePositionX, mousepositionY); 
         console.log(lifetime, color, shape);

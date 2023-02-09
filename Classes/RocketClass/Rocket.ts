@@ -9,19 +9,21 @@ namespace Fireworks {
         particles: Particle[];
 
         constructor(_lifetime: number, _color: string, _shape: string, _position: Vector) {
-            let position: Vector = new Vector(this.position.x, this.position.y);
-            this.position = position;
+            this.position = _position;
             this.color = _color;
             this.shape = _shape;
             this.lifetime = _lifetime;
+            this.explode();
         }
 
         explode(): void {
-
-            for (let i: number; i >= 30; i++) {
+            // erstellt Partikel und pushed sie ins Array
+            for (let i: number = 0; i >= 30; i++) {
+                // Kreis oder Viereck
                 switch (this.shape) {
                     case "circle":
-                        this.particles.push(new Circle(this.color, this.position, this.lifetime));
+                        let createdCircle: Particle = new Circle(this.color, this.position, this.lifetime)
+                        this.particles.push(createdCircle);
                         break;
                     case "square":
                         this.particles.push(new Square(this.color, this.position, this.lifetime));

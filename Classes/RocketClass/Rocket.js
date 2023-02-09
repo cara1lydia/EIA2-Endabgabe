@@ -7,17 +7,20 @@ var Fireworks;
         position;
         particles;
         constructor(_lifetime, _color, _shape, _position) {
-            let position = new Fireworks.Vector(this.position.x, this.position.y);
-            this.position = position;
+            this.position = _position;
             this.color = _color;
             this.shape = _shape;
             this.lifetime = _lifetime;
+            this.explode();
         }
         explode() {
-            for (let i; i >= 30; i++) {
+            // erstellt Partikel und pushed sie ins Array
+            for (let i = 0; i >= 30; i++) {
+                // Kreis oder Viereck
                 switch (this.shape) {
                     case "circle":
-                        this.particles.push(new Fireworks.Circle(this.color, this.position, this.lifetime));
+                        let createdCircle = new Fireworks.Circle(this.color, this.position, this.lifetime);
+                        this.particles.push(createdCircle);
                         break;
                     case "square":
                         this.particles.push(new Fireworks.Square(this.color, this.position, this.lifetime));

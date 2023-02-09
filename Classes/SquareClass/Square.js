@@ -8,7 +8,8 @@ var Fireworks;
             Fireworks.crc2.stroke();
             Fireworks.crc2.fillStyle = this.color;
             if (this.lifetime < 0) {
-                Fireworks.crc2.globalAlpha = this.opacity--;
+                Fireworks.crc2.globalAlpha = this.opacity;
+                this.opacity -= 0.05;
             }
             Fireworks.crc2.fill();
             Fireworks.crc2.restore();

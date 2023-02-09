@@ -3,7 +3,7 @@
     * Name: Cara Lydia Brüggendieck
     * Matrikel: 269899
     * Datum: 10.02.2023
-    * Quellen:
+    * Quellen: In Zusammenarbeit mit Vivi und Henning
     */
 var Fireworks;
 (function (Fireworks) {
@@ -13,7 +13,7 @@ var Fireworks;
     let radius;
     let opacity;
     let speed;
-    let rocket;
+    let rocket = [];
     //Laden der Seite
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
@@ -39,10 +39,11 @@ var Fireworks;
             shape = String(formData.get("theshape"));
             console.log(entry[1]);
         }
-        //let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
-        //let rocketCreated: Firework = new Rocket (size, color, shape, rocketPosition);
-        //fireworks.push(rocketCreated);
-        animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
+        let rocketPosition = new Fireworks.Vector(mousePositionX, mousepositionY);
+        let rocketCreated = new Fireworks.Rocket(lifetime, color, shape, rocketPosition);
+        console.log(rocketCreated);
+        rocket.push(rocketCreated);
+        //animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
         console.log(mousePositionX, mousepositionY);
         console.log(lifetime, color, shape);
     }
