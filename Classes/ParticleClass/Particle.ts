@@ -10,7 +10,7 @@ namespace Fireworks {
         position: Vector;
 
         constructor(_color: string, _position: Vector, _lifetime: number) {
-            let speed: Vector = new Vector(Math.floor((Math.random() * 20) + 2), Math.floor((Math.random() * 20) + 2));
+            let speed: Vector = new Vector( Math.random() * getRandomNumber(-30, 30), Math.random() * getRandomNumber(-20, 20));
             this.speed = speed;
             this.position = _position;
             this.color = _color;
@@ -19,9 +19,17 @@ namespace Fireworks {
             this.opacity = 1;
         }
 
-        move(): void {
+        draw(): void {
+            //
+        }
+
+        move(_timeslice: number): void {
             let offset: Vector = this.speed;
             this.position.add(offset);
+
+
+
+            
         }
     }
 }

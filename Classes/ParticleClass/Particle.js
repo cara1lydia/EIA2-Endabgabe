@@ -8,7 +8,7 @@ var Fireworks;
         lifetime;
         position;
         constructor(_color, _position, _lifetime) {
-            let speed = new Fireworks.Vector(Math.floor((Math.random() * 20) + 2), Math.floor((Math.random() * 20) + 2));
+            let speed = new Fireworks.Vector(Math.random() * Fireworks.getRandomNumber(-30, 30), Math.random() * Fireworks.getRandomNumber(-20, 20));
             this.speed = speed;
             this.position = _position;
             this.color = _color;
@@ -16,7 +16,10 @@ var Fireworks;
             this.radius = Math.floor((Math.random() * 20) + 2);
             this.opacity = 1;
         }
-        move() {
+        draw() {
+            //
+        }
+        move(_timeslice) {
             let offset = this.speed;
             this.position.add(offset);
         }

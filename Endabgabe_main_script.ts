@@ -3,7 +3,7 @@
     * Name: Cara Lydia Brüggendieck
     * Matrikel: 269899
     * Datum: 10.02.2023
-    * Quellen: In Zusammenarbeit mit Vivi und Henning
+    * Quellen: In Zusammenarbeit mit Vivi, Anki, Judith und Henning
     */
 
 namespace Fireworks {
@@ -19,12 +19,16 @@ namespace Fireworks {
     let opacity: number;
     let speed: Vector;
     let rocket: Rocket[] = [];
+    let particle: Particle;
+    let url: string = "https://webuser.hs-furtwangen.de/~brueggen/Database/index.php/";
+
+
 
 
     //Laden der Seite
     window.addEventListener("load", handleLoad);
 
-    function handleLoad(_event: Event): void {
+    async function handleLoad(_event: Event): Promise<void> {
         canvas = document.querySelector("canvas");
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
@@ -34,6 +38,9 @@ namespace Fireworks {
 
         //eventlistener
         document.getElementById("canvas").addEventListener("click", createRocket);
+        document.getElementById("savebutton").addEventListener("click", saveRocket);
+
+        window.setInterval(animateRocket, 20);
     }
 
     //Ausführen der Kreation
@@ -53,53 +60,89 @@ namespace Fireworks {
             console.log(entry[1]);
         }
 
-
         let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
-        let rocketCreated: Rocket = new Rocket (lifetime, color, shape, rocketPosition);
+        let rocketCreated: Rocket = new Rocket(lifetime, color, shape, rocketPosition);
         console.log(rocketCreated);
         rocket.push(rocketCreated);
 
+        console.log(rocket);
+
+
         //animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
 
-        console.log(mousePositionX, mousepositionY); 
+        console.log(mousePositionX, mousepositionY);
         console.log(lifetime, color, shape);
     }
 
-    //kreieren der Rakete 
-    function animateRocket ( _mousePositionX: number, _mousePositionY: number, _size: number, _color: string, _radius: number, _opacity: number, _speed: Vector, _shape: string): void {
 
-        let rocketPosition: Vector = new Vector(_mousePositionX, _mousePositionY);
-        let color: string = _color;
-        let quantity: number = 30;
-        let radian: number = (Math.PI * 2) / quantity;
-        
-        for (let i: number = 0; i < quantity; i++) {
-            let px: number;
-            let py: number;
-            let speed: Vector;
-            let newRocket: Rocket;
-            if (i % 2 == 0) {
-              px = Math.cos(radian * i) * 150 + Math.random() * 20;
-              py = Math.sin(radian * i) * 150 + Math.random() * 20;
+    function animateRocket(): void {
+        if (rocket.length > 0) {
+            for (let newRocket of rocket) {
+                for (let particle of newRocket.particles) {
+                    particle.move(1000);
+                    particle.draw();
+                    newRocket.lifetime--;
+                }
             }
-            else {
-              px = Math.cos(radian * i) * 110 * Math.random() * 2;
-              py = Math.sin(radian * i) * 110 * Math.random() * 2;
-            }
-            speed = new Vector(px, py);
-            newRocket = new Rocket(lifetime, color, shape, rocketPosition);
-            rocket.push(newRocket);
-          }
+        }
     }
 
-    //Save Button überträgt Settings auf Speicherstand
-    function saveRocket (): void {
+    //Save Button liest Werte der FormData
+    export async function saveRocket(_event: Event): Promise<void> {
 
+        console.log("Daten");
+
+        let formData: FormData = new FormData(document.forms[0]);
+
+        for (let entry of formData) {
+            lifetime = Number(formData.get("thesize"));
+            color = String(formData.get("thecolor"));
+            shape = String(formData.get("theshape"));
+
+            console.log(entry[1]);
+        }
+
+        sendData(formData);
+
+    }
+    //Daten werden dem Server zugeschickt 
+    async function sendData(_formData: FormData): Promise<void> {
+
+        //Umwandlung der FormData ins Json Format
+        interface FormDataJSON {
+            [key: string]: FormDataEntryValue | FormDataEntryValue[];
+        }
+        let json: FormDataJSON = {};
+        for (let key of _formData.keys())
+            if (!json[key]) {
+                let values: FormDataEntryValue[] = _formData.getAll(key);
+                json[key] = values.length > 1 ? values : values[0];
+            }
+
+        //erzeugt URL query Befehl für Server
+        let query: URLSearchParams = new URLSearchParams();
+        query.set("command", "insert");
+        query.set("collection", "Rockets");
+        query.set("data", JSON.stringify(json));
+
+        //Konsolenbefehl zur Überprüfung der URL
+        let response: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response.text();
+        if (responseText.includes("success")) {
+            console.log("Item added!");
+        }
+        else {
+            console.log("Error! Try again!");
+        }
     }
 
     //Beim Klicken auf Speicherstand werden Daten auf Settings übertragen
-    function getSavedRocket (): void {
+    function getSavedRocket(): void {
 
+    }
+
+    export function getRandomNumber(_min: number, _max: number): number {
+        return Math.floor(Math.random() * (_max - _min + 1) ) + _min;
     }
 
 
