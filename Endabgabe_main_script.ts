@@ -20,18 +20,17 @@ namespace Fireworks {
     let speed: Vector;
     let rocket: Rocket[] = [];
     let particle: Particle;
-    let url: string = "https://webuser.hs-furtwangen.de/~brueggen/Database/index.php/";
-    let rs1: boolean = true;
-    let rs2: boolean = false;
-    let rs3: boolean = false;
-    let rs4: boolean = false;
 
-
-
+    export let rs1: boolean = true;
+    export let rs2: boolean = false;
+    export let rs3: boolean = false;
+    export let rs4: boolean = false;
 
 
     //Laden der Seite
     window.addEventListener("load", handleLoad);
+
+
 
     async function handleLoad(_event: Event): Promise<void> {
         canvas = document.querySelector("canvas");
@@ -40,6 +39,9 @@ namespace Fireworks {
         //Größe Canvas
         crc2.canvas.width = window.innerWidth * 0.6;
         crc2.canvas.height = window.innerHeight * 0.45;
+
+        //fetch Data
+
 
         //eventlistener
         document.getElementById("canvas").addEventListener("click", createRocket);
@@ -51,6 +53,8 @@ namespace Fireworks {
 
         window.setInterval(animateRocket, 20);
     }
+
+    
 
     //Ausführen der Kreation
     function createRocket(_event: MouseEvent): void {
@@ -113,64 +117,6 @@ namespace Fireworks {
         }
 
         sendData(formData);
-
-    }
-    //Daten werden dem Server zugeschickt 
-    async function sendData(_formData: FormData): Promise<void> {
-
-        //Umwandlung der FormData ins Json Format
-        interface FormDataJSON {
-            [key: string]: FormDataEntryValue | FormDataEntryValue[];
-        }
-        let json: FormDataJSON = {};
-        for (let key of _formData.keys())
-            if (!json[key]) {
-                let values: FormDataEntryValue[] = _formData.getAll(key);
-                json[key] = values.length > 1 ? values : values[0];
-            }
-
-        //erzeugt URL query Befehl für Server
-        let query: URLSearchParams = new URLSearchParams();
-        query.set("command", "update");
-        query.set("collection", "Rockets");
-
-        //je nach ausgewählter Raktete wird auf eine andere ID zugegriffen und diese geupdatet
-        if (rs1 == true) {
-            query.set("id", "63e7beb4dd720");
-        } else if (rs2 == true) {
-            query.set("id", "63e7beb6c8a50");
-        } else if (rs3 == true) {
-            query.set("id", "63e7beb91ba6b");
-        } else if (rs4 == true) {
-            query.set("id", "63e7bebbb09cd");
-        }
-        query.set("data", JSON.stringify(json));
-
-        //Konsolenbefehl zur Überprüfung der URL
-        let response: Response = await fetch(url + "?" + query.toString());
-        console.log(response);
-        let responseText: string = await response.text();
-        if (responseText.includes("success")) {
-            console.log("Item added!");
-        }
-        else {
-            console.log("Error! Try again!");
-        }
-    }
-
-    //Beim Klicken auf Speicherstand werden Daten auf Settings übertragen
-    function getSavedRocket(): void {
-        if (rs1 == true) {
-            //zugriff auf Database
-
-        } else if (rs2 == true) {
-
-        } else if (rs3 == true) {
-
-        } else if (rs4 == true) {
-
-        }
-
 
     }
 
@@ -247,7 +193,6 @@ namespace Fireworks {
         }
 
         getSavedRocket();
-
     }
 
 

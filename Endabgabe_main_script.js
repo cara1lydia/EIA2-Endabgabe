@@ -15,11 +15,10 @@ var Fireworks;
     let speed;
     let rocket = [];
     let particle;
-    let url = "https://webuser.hs-furtwangen.de/~brueggen/Database/index.php/";
-    let rs1 = true;
-    let rs2 = false;
-    let rs3 = false;
-    let rs4 = false;
+    Fireworks.rs1 = true;
+    Fireworks.rs2 = false;
+    Fireworks.rs3 = false;
+    Fireworks.rs4 = false;
     //Laden der Seite
     window.addEventListener("load", handleLoad);
     async function handleLoad(_event) {
@@ -28,6 +27,7 @@ var Fireworks;
         //Größe Canvas
         Fireworks.crc2.canvas.width = window.innerWidth * 0.6;
         Fireworks.crc2.canvas.height = window.innerHeight * 0.45;
+        //fetch Data
         //eventlistener
         document.getElementById("canvas").addEventListener("click", createRocket);
         document.getElementById("savebutton").addEventListener("click", saveRocket);
@@ -83,58 +83,9 @@ var Fireworks;
             shape = String(formData.get("theshape"));
             console.log(entry[1]);
         }
-        sendData(formData);
+        Fireworks.sendData(formData);
     }
     Fireworks.saveRocket = saveRocket;
-    //Daten werden dem Server zugeschickt 
-    async function sendData(_formData) {
-        let json = {};
-        for (let key of _formData.keys())
-            if (!json[key]) {
-                let values = _formData.getAll(key);
-                json[key] = values.length > 1 ? values : values[0];
-            }
-        //erzeugt URL query Befehl für Server
-        let query = new URLSearchParams();
-        query.set("command", "update");
-        query.set("collection", "Rockets");
-        //je nach ausgewählter Raktete wird auf eine andere ID zugegriffen und diese geupdatet
-        if (rs1 == true) {
-            query.set("id", "63e7beb4dd720");
-        }
-        else if (rs2 == true) {
-            query.set("id", "63e7beb6c8a50");
-        }
-        else if (rs3 == true) {
-            query.set("id", "63e7beb91ba6b");
-        }
-        else if (rs4 == true) {
-            query.set("id", "63e7bebbb09cd");
-        }
-        query.set("data", JSON.stringify(json));
-        //Konsolenbefehl zur Überprüfung der URL
-        let response = await fetch(url + "?" + query.toString());
-        console.log(response);
-        let responseText = await response.text();
-        if (responseText.includes("success")) {
-            console.log("Item added!");
-        }
-        else {
-            console.log("Error! Try again!");
-        }
-    }
-    //Beim Klicken auf Speicherstand werden Daten auf Settings übertragen
-    function getSavedRocket() {
-        if (rs1 == true) {
-            //zugriff auf Database
-        }
-        else if (rs2 == true) {
-        }
-        else if (rs3 == true) {
-        }
-        else if (rs4 == true) {
-        }
-    }
     //Zufällige Nummer für andere Funktionen 
     function getRandomNumber(_min, _max) {
         return Math.floor(Math.random() * (_max - _min + 1)) + _min;
@@ -148,66 +99,66 @@ var Fireworks;
         let button3 = document.getElementById("rs3");
         let button4 = document.getElementById("rs4");
         if (eventTarget == button1) {
-            rs1 = true;
-            rs2 = false;
-            rs3 = false;
-            rs4 = false;
+            Fireworks.rs1 = true;
+            Fireworks.rs2 = false;
+            Fireworks.rs3 = false;
+            Fireworks.rs4 = false;
         }
         else if (eventTarget == button2) {
-            rs1 = false;
-            rs2 = true;
-            rs3 = false;
-            rs4 = false;
+            Fireworks.rs1 = false;
+            Fireworks.rs2 = true;
+            Fireworks.rs3 = false;
+            Fireworks.rs4 = false;
         }
         else if (eventTarget == button3) {
-            rs1 = false;
-            rs2 = false;
-            rs3 = true;
-            rs4 = false;
+            Fireworks.rs1 = false;
+            Fireworks.rs2 = false;
+            Fireworks.rs3 = true;
+            Fireworks.rs4 = false;
         }
         else if (eventTarget == button4) {
-            rs1 = false;
-            rs2 = false;
-            rs3 = false;
-            rs4 = true;
+            Fireworks.rs1 = false;
+            Fireworks.rs2 = false;
+            Fireworks.rs3 = false;
+            Fireworks.rs4 = true;
         }
-        if (rs1 == true) {
+        if (Fireworks.rs1 == true) {
             button1.style.backgroundColor = "#814bff";
             button2.style.backgroundColor = "rgb(213, 189, 236)";
             button3.style.backgroundColor = "rgb(213, 189, 236)";
             button4.style.backgroundColor = "rgb(213, 189, 236)";
-            rs2 = false;
-            rs3 = false;
-            rs4 = false;
+            Fireworks.rs2 = false;
+            Fireworks.rs3 = false;
+            Fireworks.rs4 = false;
         }
-        else if (rs2 == true) {
+        else if (Fireworks.rs2 == true) {
             button2.style.backgroundColor = "#814bff";
             button1.style.backgroundColor = "rgb(213, 189, 236)";
             button3.style.backgroundColor = "rgb(213, 189, 236)";
             button4.style.backgroundColor = "rgb(213, 189, 236)";
-            rs1 = false;
-            rs3 = false;
-            rs4 = false;
+            Fireworks.rs1 = false;
+            Fireworks.rs3 = false;
+            Fireworks.rs4 = false;
         }
-        else if (rs3 == true) {
+        else if (Fireworks.rs3 == true) {
             button3.style.backgroundColor = "#814bff";
             button2.style.backgroundColor = "rgb(213, 189, 236)";
             button1.style.backgroundColor = "rgb(213, 189, 236)";
             button4.style.backgroundColor = "rgb(213, 189, 236)";
-            rs1 = false;
-            rs2 = false;
-            rs4 = false;
+            Fireworks.rs1 = false;
+            Fireworks.rs2 = false;
+            Fireworks.rs4 = false;
         }
-        else if (rs4 == true) {
+        else if (Fireworks.rs4 == true) {
             button4.style.backgroundColor = "#814bff";
             button1.style.backgroundColor = "rgb(213, 189, 236)";
             button3.style.backgroundColor = "rgb(213, 189, 236)";
             button2.style.backgroundColor = "rgb(213, 189, 236)";
-            rs1 = false;
-            rs2 = false;
-            rs3 = false;
+            Fireworks.rs1 = false;
+            Fireworks.rs2 = false;
+            Fireworks.rs3 = false;
         }
-        getSavedRocket();
+        Fireworks.getSavedRocket();
     }
 })(Fireworks || (Fireworks = {}));
 //# sourceMappingURL=Endabgabe_main_script.js.map
