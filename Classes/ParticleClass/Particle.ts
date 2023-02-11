@@ -12,7 +12,7 @@ namespace Fireworks {
         constructor(_color: string, _position: Vector, _lifetime: number) {
             let speed: Vector = new Vector( Math.random() * getRandomNumber(-30, 30), Math.random() * getRandomNumber(-20, 20));
             this.speed = speed;
-            this.position = _position;
+            this.position = new Vector(_position.x, _position.y);
             this.color = _color;
             this.lifetime = _lifetime;
             this.radius = Math.floor((Math.random() * 20) + 2);

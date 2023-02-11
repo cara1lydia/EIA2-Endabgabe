@@ -10,7 +10,7 @@ var Fireworks;
         constructor(_color, _position, _lifetime) {
             let speed = new Fireworks.Vector(Math.random() * Fireworks.getRandomNumber(-30, 30), Math.random() * Fireworks.getRandomNumber(-20, 20));
             this.speed = speed;
-            this.position = _position;
+            this.position = new Fireworks.Vector(_position.x, _position.y);
             this.color = _color;
             this.lifetime = _lifetime;
             this.radius = Math.floor((Math.random() * 20) + 2);

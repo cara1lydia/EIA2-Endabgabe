@@ -3,7 +3,7 @@
     * Name: Cara Lydia Brüggendieck
     * Matrikel: 269899
     * Datum: 10.02.2023
-    * Quellen: In Zusammenarbeit mit Vivi, Anki, Judith und Henning
+    * Quellen: In Zusammenarbeit mit Vivi, Anki und Henning
     */
 var Fireworks;
 (function (Fireworks) {
@@ -16,6 +16,10 @@ var Fireworks;
     let rocket = [];
     let particle;
     let url = "https://webuser.hs-furtwangen.de/~brueggen/Database/index.php/";
+    let rs1 = true;
+    let rs2 = false;
+    let rs3 = false;
+    let rs4 = false;
     //Laden der Seite
     window.addEventListener("load", handleLoad);
     async function handleLoad(_event) {
@@ -27,6 +31,10 @@ var Fireworks;
         //eventlistener
         document.getElementById("canvas").addEventListener("click", createRocket);
         document.getElementById("savebutton").addEventListener("click", saveRocket);
+        document.getElementById("rs1").addEventListener("click", clickRocketButton);
+        document.getElementById("rs2").addEventListener("click", clickRocketButton);
+        document.getElementById("rs3").addEventListener("click", clickRocketButton);
+        document.getElementById("rs4").addEventListener("click", clickRocketButton);
         window.setInterval(animateRocket, 20);
     }
     //Ausführen der Kreation
@@ -53,10 +61,11 @@ var Fireworks;
         console.log(lifetime, color, shape);
     }
     function animateRocket() {
+        Fireworks.crc2.clearRect(0, 0, Fireworks.canvas.width, Fireworks.canvas.height);
         if (rocket.length > 0) {
             for (let newRocket of rocket) {
                 for (let particle of newRocket.particles) {
-                    particle.move(1000);
+                    particle.move(10);
                     particle.draw();
                     newRocket.lifetime--;
                 }
@@ -86,11 +95,25 @@ var Fireworks;
             }
         //erzeugt URL query Befehl für Server
         let query = new URLSearchParams();
-        query.set("command", "insert");
+        query.set("command", "update");
         query.set("collection", "Rockets");
+        //je nach ausgewählter Raktete wird auf eine andere ID zugegriffen und diese geupdatet
+        if (rs1 == true) {
+            query.set("id", "63e7beb4dd720");
+        }
+        else if (rs2 == true) {
+            query.set("id", "63e7beb6c8a50");
+        }
+        else if (rs3 == true) {
+            query.set("id", "63e7beb91ba6b");
+        }
+        else if (rs4 == true) {
+            query.set("id", "63e7bebbb09cd");
+        }
         query.set("data", JSON.stringify(json));
         //Konsolenbefehl zur Überprüfung der URL
         let response = await fetch(url + "?" + query.toString());
+        console.log(response);
         let responseText = await response.text();
         if (responseText.includes("success")) {
             console.log("Item added!");
@@ -101,10 +124,89 @@ var Fireworks;
     }
     //Beim Klicken auf Speicherstand werden Daten auf Settings übertragen
     function getSavedRocket() {
+        if (rs1 == true) {
+            //zugriff auf Database
+        }
+        else if (rs2 == true) {
+        }
+        else if (rs3 == true) {
+        }
+        else if (rs4 == true) {
+        }
     }
+    //Zufällige Nummer für andere Funktionen 
     function getRandomNumber(_min, _max) {
         return Math.floor(Math.random() * (_max - _min + 1)) + _min;
     }
     Fireworks.getRandomNumber = getRandomNumber;
+    //Farbe des ausgewählten Buttons wird angezeigt
+    function clickRocketButton(_event) {
+        let eventTarget = _event.target;
+        let button1 = document.getElementById("rs1");
+        let button2 = document.getElementById("rs2");
+        let button3 = document.getElementById("rs3");
+        let button4 = document.getElementById("rs4");
+        if (eventTarget == button1) {
+            rs1 = true;
+            rs2 = false;
+            rs3 = false;
+            rs4 = false;
+        }
+        else if (eventTarget == button2) {
+            rs1 = false;
+            rs2 = true;
+            rs3 = false;
+            rs4 = false;
+        }
+        else if (eventTarget == button3) {
+            rs1 = false;
+            rs2 = false;
+            rs3 = true;
+            rs4 = false;
+        }
+        else if (eventTarget == button4) {
+            rs1 = false;
+            rs2 = false;
+            rs3 = false;
+            rs4 = true;
+        }
+        if (rs1 == true) {
+            button1.style.backgroundColor = "#814bff";
+            button2.style.backgroundColor = "rgb(213, 189, 236)";
+            button3.style.backgroundColor = "rgb(213, 189, 236)";
+            button4.style.backgroundColor = "rgb(213, 189, 236)";
+            rs2 = false;
+            rs3 = false;
+            rs4 = false;
+        }
+        else if (rs2 == true) {
+            button2.style.backgroundColor = "#814bff";
+            button1.style.backgroundColor = "rgb(213, 189, 236)";
+            button3.style.backgroundColor = "rgb(213, 189, 236)";
+            button4.style.backgroundColor = "rgb(213, 189, 236)";
+            rs1 = false;
+            rs3 = false;
+            rs4 = false;
+        }
+        else if (rs3 == true) {
+            button3.style.backgroundColor = "#814bff";
+            button2.style.backgroundColor = "rgb(213, 189, 236)";
+            button1.style.backgroundColor = "rgb(213, 189, 236)";
+            button4.style.backgroundColor = "rgb(213, 189, 236)";
+            rs1 = false;
+            rs2 = false;
+            rs4 = false;
+        }
+        else if (rs4 == true) {
+            button4.style.backgroundColor = "#814bff";
+            button1.style.backgroundColor = "rgb(213, 189, 236)";
+            button3.style.backgroundColor = "rgb(213, 189, 236)";
+            button2.style.backgroundColor = "rgb(213, 189, 236)";
+            rs1 = false;
+            rs2 = false;
+            rs3 = false;
+        }
+        getSavedRocket();
+    }
 })(Fireworks || (Fireworks = {}));
 //# sourceMappingURL=Endabgabe_main_script.js.map
