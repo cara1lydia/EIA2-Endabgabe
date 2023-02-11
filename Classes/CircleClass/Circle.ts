@@ -17,7 +17,7 @@ namespace Fireworks {
             crc2.fillStyle = this.color;
             if (this.lifetime < 0) {
                 crc2.globalAlpha = this.opacity;
-                this.opacity -= 0.05;
+                this.opacity -= 0.5;
             }
             crc2.fill();
             crc2.restore();

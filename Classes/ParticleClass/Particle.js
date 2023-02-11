@@ -19,9 +19,10 @@ var Fireworks;
         draw() {
             //
         }
-        move(_timeslice) {
+        move() {
             let offset = this.speed;
             this.position.add(offset);
+            this.lifetime--;
         }
     }
     Fireworks.Particle = Particle;

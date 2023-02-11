@@ -23,9 +23,10 @@ namespace Fireworks {
             //
         }
 
-        move(_timeslice: number): void {
+        move(): void {
             let offset: Vector = this.speed;
             this.position.add(offset);
+            this.lifetime--;
 
 
 

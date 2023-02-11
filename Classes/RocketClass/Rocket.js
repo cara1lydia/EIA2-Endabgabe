@@ -28,6 +28,15 @@ var Fireworks;
                 }
             }
         }
+        draw() {
+            for (let i = 0; i < this.particles.length; i++) {
+                this.particles[i].move();
+                this.particles[i].draw();
+                if (this.particles[i].lifetime <= 0) {
+                    this.particles.splice(i, 1);
+                }
+            }
+        }
     }
     Fireworks.Rocket = Rocket;
 })(Fireworks || (Fireworks = {}));

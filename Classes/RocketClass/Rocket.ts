@@ -32,6 +32,15 @@ namespace Fireworks {
 
             }
         }
+        draw(): void {
+            for (let i: number = 0; i < this.particles.length; i++) {
+                this.particles[i].move();
+                this.particles[i].draw();
+                if (this.particles[i].lifetime <= 0) {
+                    this.particles.splice(i, 1);
+                }
+            }
+        }
 
 
 

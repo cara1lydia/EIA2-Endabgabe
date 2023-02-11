@@ -87,11 +87,11 @@ namespace Fireworks {
     function animateRocket(): void {
         crc2.clearRect(0, 0, canvas.width, canvas.height);
         if (rocket.length > 0) {
-            for (let newRocket of rocket) {
-                for (let particle of newRocket.particles) {
-                    particle.move(10);
-                    particle.draw();
-                    newRocket.lifetime--;
+            for (let i: number = 0; i < rocket.length; i++) {
+                if (rocket[i].particles.length != 0) {
+                    rocket[i].draw();
+                } else {
+                    rocket.splice(i, 1);
                 }
             }
         }

@@ -14,7 +14,7 @@ var Fireworks;
             Fireworks.crc2.fillStyle = this.color;
             if (this.lifetime < 0) {
                 Fireworks.crc2.globalAlpha = this.opacity;
-                this.opacity -= 0.05;
+                this.opacity -= 0.5;
             }
             Fireworks.crc2.fill();
             Fireworks.crc2.restore();
