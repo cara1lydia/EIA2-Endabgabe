@@ -35,9 +35,6 @@ namespace Fireworks {
             let offset: Vector = this.speed;
             this.position.add(offset);
             this.lifetime--;
-
-
-
             
         }
     }
