@@ -1,5 +1,12 @@
 var Fireworks;
 (function (Fireworks) {
+    /**
+    * Aufgabe: Endabgabe
+    * Name: Cara Lydia Brüggendieck
+    * Matrikel: 269899
+    * Datum: 10.02.2023
+    * Quellen: In Zusammenarbeit mit Vivien Peschke, Anki Pfeffer und Henning Pils
+    */
     class Square extends Fireworks.Particle {
         constructor(_color, _position, _lifetime) {
             super(_color, _position, _lifetime);

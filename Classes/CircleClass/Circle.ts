@@ -1,5 +1,13 @@
 namespace Fireworks {
 
+    /**
+    * Aufgabe: Endabgabe 
+    * Name: Cara Lydia Brüggendieck
+    * Matrikel: 269899
+    * Datum: 10.02.2023
+    * Quellen: In Zusammenarbeit mit Vivien Peschke, Anki Pfeffer und Henning Pils
+    */
+
     export class Circle extends Particle {
         
         constructor(_color: string, _position: Vector, _lifetime: number) {

@@ -1,14 +1,20 @@
 namespace Fireworks {
 
+/**
+    * Aufgabe: Endabgabe 
+    * Name: Cara Lydia Brüggendieck
+    * Matrikel: 269899
+    * Datum: 10.02.2023
+    * Quellen: In Zusammenarbeit mit Vivien Peschke, Anki Pfeffer und Henning Pils
+    */
+
     export let url: string = "https://webuser.hs-furtwangen.de/~brueggen/Database/index.php/";
     export let serverRockets: RocketData[] = [];
     export interface RocketData {
-        lifetime: number;
-        color: string;
-        shape: string;
+        thelifetime: string;
+        thecolor: string;
+        theshape: string;
     }
-
-
 
     //Daten werden dem Server zugeschickt 
     export async function sendData(_formData: FormData): Promise<void> {
@@ -43,7 +49,6 @@ namespace Fireworks {
 
         //Konsolenbefehl zur Überprüfung der URL
         let response: Response = await fetch(url + "?" + query.toString());
-        console.log(response);
         let responseText: string = await response.text();
         if (responseText.includes("success")) {
             console.log("Item added!");
@@ -53,32 +58,46 @@ namespace Fireworks {
         }
     }
 
-    export async function handleData(): Promise<any> {
+    //Beim Klicken auf Speicherstand werden Daten auf Settings übertragen
+    export async function getSavedRocket(): Promise<any> {
 
+        serverRockets.splice(0, serverRockets.length);
         let response: Response = await fetch(url + "?command=find&collection=Rockets");
         let item: string = await response.text();
         let data: any = JSON.parse(item);
         //key = ID 
         for (let key in data["data"]) {
             serverRockets.push(data["data"][key]);
-
-            let test: any = data.data[key];
-
-            //console.log(test);
-
-            //console.log(test.thesize);
         }
+
+        let lifetime: HTMLInputElement = <HTMLInputElement>document.getElementById("thelifetime");
+        let color: HTMLInputElement = <HTMLInputElement>document.getElementById("thecolor");
+        let shape: HTMLInputElement = <HTMLInputElement>document.getElementById("theshape");
 
         if (rs1 == true) {
             //zugriff auf Database
             let r1: RocketData = serverRockets[0];
-            console.log(r1);
+            r1.thelifetime = lifetime.value;
+            color.value = r1.thecolor;
+            shape.value = r1.theshape;
 
         } else if (rs2 == true) {
+            let r2: RocketData = serverRockets[1];
+            r2.thelifetime = lifetime.value;
+            color.value = r2.thecolor;
+            shape.value = r2.theshape;
 
         } else if (rs3 == true) {
+            let r3: RocketData = serverRockets[2];
+            r3.thelifetime = lifetime.value;
+            color.value = r3.thecolor;
+            shape.value = r3.theshape;
 
         } else if (rs4 == true) {
+            let r4: RocketData = serverRockets[3];
+            r4.thelifetime = lifetime.value;
+            color.value = r4.thecolor;
+            shape.value = r4.theshape;
 
         }
 
@@ -87,25 +106,7 @@ namespace Fireworks {
 
     }
 
-    //Beim Klicken auf Speicherstand werden Daten auf Settings übertragen
-    export function getSavedRocket(): void {
-
-        serverRockets.splice(0, serverRockets.length);
-        handleData();
-
-        if (rs1 == true) {
-            //zugriff auf Database
-            type K1 = keyof RocketData[0];
-
-        } else if (rs2 == true) {
-
-        } else if (rs3 == true) {
-
-        } else if (rs4 == true) {
-
-        }
 
 
-    }
 
 }

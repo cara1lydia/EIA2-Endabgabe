@@ -3,7 +3,7 @@
     * Name: Cara Lydia Brüggendieck
     * Matrikel: 269899
     * Datum: 10.02.2023
-    * Quellen: In Zusammenarbeit mit Vivi, Anki und Henning
+    * Quellen: In Zusammenarbeit mit Vivien Peschke, Anki Pfeffer und Henning Pils
     */
 
 namespace Fireworks {
@@ -15,11 +15,7 @@ namespace Fireworks {
     let lifetime: number;
     let color: string;
     let shape: string;
-    let radius: number;
-    let opacity: number;
-    let speed: Vector;
     let rocket: Rocket[] = [];
-    let particle: Particle;
 
     export let rs1: boolean = true;
     export let rs2: boolean = false;
@@ -52,6 +48,8 @@ namespace Fireworks {
         document.getElementById("rs4").addEventListener("click", clickRocketButton);
 
         window.setInterval(animateRocket, 20);
+
+        getSavedRocket();
     }
 
     
@@ -66,7 +64,7 @@ namespace Fireworks {
         let formData: FormData = new FormData(document.forms[0]);
 
         for (let entry of formData) {
-            lifetime = Number(formData.get("thesize"));
+            lifetime = Number(formData.get("thelifetime"));
             color = String(formData.get("thecolor"));
             shape = String(formData.get("theshape"));
 
@@ -75,16 +73,8 @@ namespace Fireworks {
 
         let rocketPosition: Vector = new Vector(mousePositionX, mousepositionY);
         let rocketCreated: Rocket = new Rocket(lifetime, color, shape, rocketPosition);
-        console.log(rocketCreated);
         rocket.push(rocketCreated);
 
-        console.log(rocket);
-
-
-        //animateRocket(mousePositionX, mousepositionY, lifetime, color, radius, opacity, speed, shape);
-
-        console.log(mousePositionX, mousepositionY);
-        console.log(lifetime, color, shape);
     }
 
 
@@ -109,7 +99,7 @@ namespace Fireworks {
         let formData: FormData = new FormData(document.forms[0]);
 
         for (let entry of formData) {
-            lifetime = Number(formData.get("thesize"));
+            lifetime = Number(formData.get("thelifetime"));
             color = String(formData.get("thecolor"));
             shape = String(formData.get("theshape"));
 
@@ -160,36 +150,26 @@ namespace Fireworks {
             button2.style.backgroundColor = "rgb(213, 189, 236)";
             button3.style.backgroundColor = "rgb(213, 189, 236)";
             button4.style.backgroundColor = "rgb(213, 189, 236)";
-            rs2 = false;
-            rs3 = false;
-            rs4 = false;
+           
         }
         else if (rs2 == true) {
             button2.style.backgroundColor = "#814bff";
             button1.style.backgroundColor = "rgb(213, 189, 236)";
             button3.style.backgroundColor = "rgb(213, 189, 236)";
             button4.style.backgroundColor = "rgb(213, 189, 236)";
-            rs1 = false;
-            rs3 = false;
-            rs4 = false;
         }
         else if (rs3 == true) {
             button3.style.backgroundColor = "#814bff";
             button2.style.backgroundColor = "rgb(213, 189, 236)";
             button1.style.backgroundColor = "rgb(213, 189, 236)";
             button4.style.backgroundColor = "rgb(213, 189, 236)";
-            rs1 = false;
-            rs2 = false;
-            rs4 = false;
         }
         else if (rs4 == true) {
             button4.style.backgroundColor = "#814bff";
             button1.style.backgroundColor = "rgb(213, 189, 236)";
             button3.style.backgroundColor = "rgb(213, 189, 236)";
             button2.style.backgroundColor = "rgb(213, 189, 236)";
-            rs1 = false;
-            rs2 = false;
-            rs3 = false;
+
         }
 
         getSavedRocket();
